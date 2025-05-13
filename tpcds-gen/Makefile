@@ -4,13 +4,9 @@ all: target/lib/dsdgen.jar target/tpcds-gen-1.0.jar
 target/tpcds-gen-1.0.jar: $(shell find -name *.java) 
 	mvn package
 
-target/tpcds_kit.zip: tpcds_kit.zip
+target/tpcds_kit.zip:
 	mkdir -p target/
 	cp tpcds_kit.zip target/tpcds_kit.zip
-
-tpcds_kit.zip:
-	curl https://public-repo-1.hortonworks.com/hive-testbench/tpcds/README
-	curl --output tpcds_kit.zip https://public-repo-1.hortonworks.com/hive-testbench/tpcds/TPCDS_Tools.zip
 
 target/lib/dsdgen.jar: target/tools/dsdgen
 	cd target/; mkdir -p lib/; ( jar cvf lib/dsdgen.jar tools/ || gjar cvf lib/dsdgen.jar tools/ )
